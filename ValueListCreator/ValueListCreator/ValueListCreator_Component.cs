@@ -28,7 +28,6 @@ namespace ValueListCreator
             if (Params.Input.Any(p => p.VolatileData.PathCount != 1))
             {
                 AddRuntimeMessage(GH_RuntimeMessageLevel.Error, "Only one branch can be accepted.");
-                valueList = null;
                 return;
             }
 

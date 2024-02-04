@@ -22,6 +22,10 @@ namespace ValueListCreator
         }
         public override GH_ObjectResponse RespondToMouseDown(GH_Canvas sender, GH_CanvasMouseEvent e)
         {
+            attribute.onGenerate = false;
+            if (attribute.Owner.RuntimeMessageLevel != Grasshopper.Kernel.GH_RuntimeMessageLevel.Blank)
+                return GH_ObjectResponse.Release;
+
             Grasshopper.Kernel.Special.GH_ValueList valueList = (attribute.Owner as ValueListCreator_Component).valueList;
             sender.Document.AddObject(valueList, true);
             valueList.Attributes.Pivot = e.CanvasLocation;
@@ -29,7 +33,6 @@ namespace ValueListCreator
 
             attribute.Owner.ExpireSolution(true);
 
-            attribute.onGenerate = false;
             return GH_ObjectResponse.Release;
         }
     }
